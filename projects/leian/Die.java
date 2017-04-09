@@ -123,4 +123,27 @@ public class Die
     }
 
 
+	public static void main(String[] args) {
+		Die die1 = new Die();
+		Die die2 = new Die(7);
+		Die die3 = new Die(7, 3);
+
+		System.out.println("Regular die before/after roll:");
+		System.out.println(die1.toString());
+		die1.roll();
+		System.out.println(die1.toString());
+		
+		System.out.println("Seven-sided die before/after roll:");
+		System.out.println(die2.toString());
+		die2.roll();
+		System.out.println(die2.toString());
+
+		System.out.println("Seven-sided die (default result 3) before/after roll:");
+		System.out.println(die3.toString());
+		die3.roll();
+		System.out.println(die3.toString());
+
+		System.out.println(die2.equals(die3));
+	}
+
 }// end of Die class
