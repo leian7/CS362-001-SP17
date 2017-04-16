@@ -1,3 +1,5 @@
+package edu.osu.cs362;
+
 import java.util.Random;
 
 /**
