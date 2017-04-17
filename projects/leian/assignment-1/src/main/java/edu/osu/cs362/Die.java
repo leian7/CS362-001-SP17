@@ -18,8 +18,8 @@ public class Die
 
 
     /**
-     * Default constructor.<p>
-     * pre: none<br>
+     * Default constructor.
+     * pre: none
      * post: getNumSides() = DEFAULT_SIDES, getResult() = 1
      */
     public Die()
@@ -28,9 +28,9 @@ public class Die
 
 
     /**
-     * Create a Die with numSides sides<p>
-     * pre: numSides > 1<br>
-     * post: getNumSides() = numSides, getResult() = 1<br>
+     * Create a Die with numSides sides
+     * pre: numSides > 1
+     * post: getNumSides() = numSides, getResult() = 1
      * An exception will be generated if the preconditions are not met
      */
     public Die(int numSides)
@@ -43,27 +43,31 @@ public class Die
 
 
     /**
-     * Create a Die with numSides and top side and result set to result<p>
-     * pre: numSides > 1, 1 <= result <= numSides<br>
-     * post: getNumSides() = numSides, getResult() = 1<br>
+     * Create a Die with numSides and top side and result set to result
+     * pre: numSides > 1, 1 <= result <= numSides
+     * post: getNumSides() = numSides, getResult() = result
      * An exception will be generated if the preconditions are not met
      */
     public Die(int numSides, int result)
     {   assert numSides > 1 && 1 <= result && result <= numSides : "Violation of precondition";
 
-        iMyNumSides = numSides;
-        iMyResult = result;
-    }
+		// BUG: STORE ROLL RESULT AS NUM SIDES AND NUM SIDES AS ROLL RESULT
+        // iMyNumSides = numSides;
+        // iMyResult = result;
+        iMyNumSides = result;
+        iMyResult = numSides;        }
 
 
     /**
-     * roll this Die. Every side has an equal chance of being the new result<p>
-     * pre: none<br>
+     * roll this Die. Every side has an equal chance of being the new result
+     * pre: none
      * post: 1 <= getResult() <= getNumSides()
      * @return the result of the Die after the roll
      */
     public int roll()
-    {   iMyResult = ourRandNumGen.nextInt(iMyNumSides) + 1;
+    {   // BUG: OMITTING `+1` FROM RANDOMLY GENERATED INT
+		// iMyResult = ourRandNumGen.nextInt(iMyNumSides) + 1;
+		iMyResult = ourRandNumGen.nextInt(iMyNumSides);
 
         assert ( 1 <= getResult() ) && ( getResult() <= getNumSides() );
 
@@ -72,8 +76,8 @@ public class Die
 
 
     /**
-     * return how many sides this Die has<p>
-     * pre: none<br>
+     * return how many sides this Die has
+     * pre: none
      * post: return how many sides this Die has
      * @return the number of sides on this Die
      */
@@ -82,8 +86,8 @@ public class Die
 
 
     /**
-     * get the current result or top number of this Die<p>
-     * pre: none<br>
+     * get the current result or top number of this Die
+     * pre: none
      * post: return the number on top of this Die
      * @return the current result of this Die
      */
@@ -92,15 +96,17 @@ public class Die
 
 
     /**
-     * returns true if this Die and the parameter otherObj are equal<p>
-     * pre: none<br>
+     * returns true if this Die and the parameter otherObj are equal
+     * pre: none
      * post: return true if the parameter is a Die object with the same number of sides as this Die and currently has the same result.
      * @return true if the the two Dice are equal, false otherwise
      */
     public boolean equals(Object otherObj)
     {   boolean result = true;
+		// BUG: IF OBJ TO COMPARE IS NULL, COUNTS AS "EQUAL" TO OUR DIE OBJ
         if(otherObj == null)
-            result = false;
+			// result = false;
+            result = true;
         else if(this == otherObj)
             result = true;
         else if(this.getClass() != otherObj.getClass())
@@ -115,8 +121,8 @@ public class Die
 
 
     /**
-     * returns a String containing information about this Die<p>
-     * pre: none<br>
+     * returns a String containing information about this Die
+     * pre: none
      * post: return a String with information about the current state of this Die
      * @return: A String with the number of sides and current result of this Die
      */
