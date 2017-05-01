@@ -61,5 +61,15 @@ public class TimeTableTest {
 		// case: appts is null but appt to del is not null
 		updated = table.deleteAppt(appts, doctor);
 		assertEquals(updated, null);
+
+		// case: neither appts nor appt is null, but appt is not valid
+		Appt bad_appt = new Appt(-1, 30, 11, 04, 2017, "invalid appt",
+								 "this is invalid appt");
+		updated = table.deleteAppt(listAppts, bad_appt);
+		assertEquals(updated, null);
+
+		// case: good appts and good appt. Remove appt from appts:
+		updated = table.deleteAppt(listAppts, doctor);
+		assertNotEquals(updated, null);
 	}
 }
