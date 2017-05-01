@@ -69,6 +69,7 @@ public class ApptTest {
 
 	@Test
 	public void test_appt_is_invalid() throws Throwable {
+		// case: bad hour:
 		Appt hourUnderZero = new Appt(-1, startMinute, startDay, startMonth,
 									  startYear, title, description);
 		assertFalse(hourUnderZero.getValid());
@@ -77,6 +78,7 @@ public class ApptTest {
 								   startYear, title, description);
 		assertFalse(hourOver23.getValid());
 
+		// case: bad minute:
 		Appt minUnderZero = new Appt(startHour, -1, startDay, startMonth,
 									 startYear, title, description);
 		assertFalse(minUnderZero.getValid());
@@ -84,5 +86,21 @@ public class ApptTest {
 		Appt minOver59 = new Appt(startHour, 60, startDay, startMonth,
 								  startYear, title, description);
 		assertFalse(minOver59.getValid());
+
+		// case: bad day:
+		Appt dayUnderOne = new Appt(startHour, startMinute, 0, startMonth,
+									startYear, title, description);
+		assertFalse(dayUnderOne.getValid());
+		Appt dayOver31 = new Appt(startHour, startMinute, 32, startMonth,
+								  startYear, title, description);
+		assertFalse(dayOver31.getValid());
+
+		// case: bad month:
+		Appt mnthUnderOne = new Appt(startHour, startMinute, startDay, 0,
+									 startYear, title, description);
+		assertFalse(mnthUnderOne.getValid());
+		Appt mnthOver12 = new Appt(startHour, startMinute, startDay, 13,
+								   startYear, title, description);
+		assertFalse(mnthOver12.getValid());
 	}
 }
