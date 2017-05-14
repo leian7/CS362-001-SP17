@@ -1,0 +1,76 @@
+* Starting client
+* Properties loaded from /home/annie/CS362-001-SP17/projects/leian/assignment-1/evosuite-files/evosuite.properties
+* Connecting to master process on port 9070
+* Analyzing classpath: 
+  - /home/annie/CS362-001-SP17/projects/leian/assignment-1/target/test-classes
+  - /home/annie/CS362-001-SP17/projects/leian/assignment-1/target/classes
+  - /home/annie/.m2/repository/junit/junit/4.12/junit-4.12.jar
+  - /home/annie/.m2/repository/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar
+* Finished analyzing classpath
+* Generating tests for class edu.osu.cs362.Die
+* Test criteria:
+  - Line Coverage
+  - Branch Coverage
+  - Exception
+  - Mutation testing (weak)
+  - Method-Output Coverage
+  - Top-Level Method Coverage
+  - No-Exception Top-Level Method Coverage
+  - Context Branch Coverage
+* Setting up search algorithm for whole suite generation
+[MASTER] 21:44:24.125 [pool-2-thread-1] WARN  TestSuiteSerialization - Cannot load tests because file does not exist: /home/annie/CS362-001-SP17/projects/leian/assignment-1/.evosuite/evosuite-seeds/edu.osu.cs362.Die.seed
+* Total number of test goals: 
+  - Line 41
+  - Branch 39
+  - Exception 0
+  - MutationFactory 178
+  - Output 14
+  - Method 9
+  - MethodNoException 9
+  - CBranchFitnessFactory 39
+* Using seed 1492317861264
+* Starting evolution
+* Search finished after 91s and 648 generations, 175727 statements, best individual has fitness: 28.083333333333336
+* Writing sequences to pool
+* Minimizing test suite
+* Going to analyze the coverage criteria
+* Coverage analysis for criterion LINE
+* Coverage of criterion LINE: 100%
+* Total number of goals: 41
+* Number of covered goals: 41
+* Coverage analysis for criterion BRANCH
+* Coverage of criterion BRANCH: 79%
+* Total number of goals: 39
+* Number of covered goals: 31
+* Coverage analysis for criterion EXCEPTION
+* Coverage of criterion EXCEPTION: 100%
+* Total number of goals: 2
+* Number of covered goals: 2
+* Coverage analysis for criterion WEAKMUTATION
+* Coverage of criterion WEAKMUTATION: 98%
+* Total number of goals: 178
+* Number of covered goals: 174
+* Coverage analysis for criterion OUTPUT
+* Coverage of criterion OUTPUT: 43%
+* Total number of goals: 14
+* Number of covered goals: 6
+* Coverage analysis for criterion METHOD
+* Coverage of criterion METHOD: 100%
+* Total number of goals: 9
+* Number of covered goals: 9
+* Coverage analysis for criterion METHODNOEXCEPTION
+* Coverage of criterion METHODNOEXCEPTION: 100%
+* Total number of goals: 9
+* Number of covered goals: 9
+* Coverage analysis for criterion CBRANCH
+* Coverage of criterion CBRANCH: 79%
+* Total number of goals: 39
+* Number of covered goals: 31
+* Generated 19 tests with total length 40
+* Resulting test suite's coverage: 87% (average coverage for all fitness functions)
+* Generating assertions
+* Resulting test suite's mutation score: 58%
+* Compiling and checking tests
+* Writing JUnit test case 'Die_ESTest' to /home/annie/CS362-001-SP17/projects/leian/assignment-1/.evosuite/tmp_2017_04_15_21_44_18/tests
+* Done!
+
