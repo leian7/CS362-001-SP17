@@ -16,7 +16,7 @@ public class CalDayTest {
 	@Test
 	public void test_add_appt() throws Throwable {
 		// case: appt is valid
-		// Existing appt:
+		// Existing appt starts later than the appt to add:
 		Appt old_appt = new Appt(14, 30, 10, 04, 2017, "Old", "This appt already exists for this CalDay");
 		// New appt to add:
 		Appt new_appt = new Appt(13, 30, 10, 04, 2017, "New", "I want to add this appt to this CalDay");
@@ -29,15 +29,15 @@ public class CalDayTest {
 		// If existing appt starts later than appt to add...!!
 		good_cal.addAppt(new_appt);
 		assertNotEquals(good_cal.getAppts(), null);
+		assertEquals(good_cal.getAppts().get(0).getTitle(), "New");
 	}
 
 	@Test
 	public void test_add_appt_order() throws Throwable {
 		// case: appt is valid
 		// Existing appt does not start later than the appt to add
-		Appt new_appt = new Appt(14, 30, 10, 04, 2017, "Old", "This appt already exists for this CalDay");
-		// New appt to add:
-		Appt old_appt = new Appt(13, 30, 10, 04, 2017, "New", "I want to add this appt to this CalDay");
+		Appt new_appt = new Appt(14, 30, 10, 04, 2017, "New", "Want to add this new appt to this CalDay");
+		Appt old_appt = new Appt(13, 30, 10, 04, 2017, "Old", "This appt is already in the appt masterlist");
 
 		GregorianCalendar day = new GregorianCalendar(2017, 04, 10);
 		CalDay good_cal = new CalDay(day);
@@ -47,6 +47,24 @@ public class CalDayTest {
 		// If existing appt starts later than appt to add...!!
 		good_cal.addAppt(new_appt);
 		assertNotEquals(good_cal.getAppts(), null);
+		assertEquals(good_cal.getAppts().get(1).getTitle(), "New");
+	}
+
+	@Test
+	public void test_add_appt_same_hour() throws Throwable {
+		// case: appt is valid
+		// Existing appt starts during same hour as the appt to add:
+		Appt new_appt = new Appt(14, 30, 10, 04, 2017, "New", "Want to add this new appt to this CalDay");
+		Appt old_appt = new Appt(14, 30, 10, 04, 2017, "Old", "This appt is already in the appt masterlist");
+		GregorianCalendar day = new GregorianCalendar(2017, 04, 10);
+		CalDay good_cal = new CalDay(day);
+		good_cal.getAppts().add(old_appt);		// place "existing" appt
+
+		// Now add the new appt using addAppt...
+		// If existing appt starts same time as appt to add...!!
+		good_cal.addAppt(new_appt);
+		assertNotEquals(good_cal.getAppts(), null);
+		assertEquals(good_cal.getAppts().get(1).getTitle(), "New");
 	}
 
 	@Test
@@ -57,6 +75,17 @@ public class CalDayTest {
 		Appt bad_appt = new Appt(-1, 30, 10, 04, 2017, "Bad", "This appt is invalid");
 		bad_cal.addAppt(bad_appt);
 		assertFalse(bad_cal.getAppts().contains(bad_appt));
+	}
+
+	@Test
+	public void test_good_CalDay() throws Throwable {
+		/* Tests that the standard constructor produces valid CalDay objets
+		 * when given valid arguments. */
+		GregorianCalendar good_day = new GregorianCalendar(2017, 04, 11);
+		CalDay good_cal = new CalDay(good_day);
+		assertEquals(good_cal.getDay(), 11);
+		assertEquals(good_cal.getMonth(), 04);
+		assertEquals(good_cal.getYear(), 2017);
 	}
 
 	@Test
