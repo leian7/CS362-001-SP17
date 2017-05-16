@@ -115,4 +115,20 @@ public class TimeTableTest {
 		updated = table.deleteAppt(listAppts, doctor);
 		assertNotEquals(updated, null);
 	}
+
+	@Test
+	public void test_del_appts_nonexistent_appt() throws Throwable {
+		// case: appt to delete doesn't exist.
+		TimeTable tb = new TimeTable();
+		LinkedList<Appt> appts = new LinkedList<Appt>(); // null
+		appts.add(dentist);
+		appts.add(doctor);
+		
+		assertEquals(2, appts.size());
+
+		Appt invalid = new Appt(13, 30, 11, 04, 2017, "Get rekt",
+								"get really wrecked");
+		LinkedList<Appt> same = tb.deleteAppt(appts, invalid);
+		assertEquals(null, same);
+	}
 }
