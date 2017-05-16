@@ -43,6 +43,49 @@ public class TimeTableTest {
 		LinkedList<CalDay> calDays = new LinkedList<CalDay>();
 		calDays = table.getApptRange(listAppts, day1, day2);
 		assertNotEquals(calDays, null);
+		assertEquals(calDays.size(), 2);
+	}
+
+	@Test
+	public void test_getApptRange_with_bad_appts() throws Throwable {
+		LinkedList<Appt> appts = new LinkedList<Appt>();  // empty appt list
+
+		// add appts to appt list, inc. an invalid one
+		Appt invalid = new Appt(13, 30, 11, 04, 2017, "Get rekt",
+			"get really wrecked");
+		appts.add(dentist);
+		appts.add(invalid);
+		appts.add(doctor);
+
+		GregorianCalendar day1 = new GregorianCalendar(2017, 04, 10);
+		GregorianCalendar day2 = new GregorianCalendar(2017, 04, 12);
+
+		LinkedList<CalDay> calDays = new LinkedList<CalDay>();
+		calDays = table.getApptRange(appts, day1, day2);
+		assertNotEquals(calDays, null);
+		assertEquals(calDays.size(), 2);
+		
+		for (int i = 0; i < calDays.size(); i++) {
+			assertEquals(calDays.get(i).getAppts().size(), 1);
+		}
+	}
+
+	@Test
+	public void test_getApptRange_without_appts() throws Throwable {
+		TimeTable tb = new TimeTable();
+		// supply empty list of appts
+		// verify that returned list of CalDays is untouched/empty
+		LinkedList<Appt> appts = new LinkedList<Appt>();  // empty appt list
+		assertEquals(appts.size(), 0);
+
+		// a couple of days to pass in, not that they matter...
+		GregorianCalendar day1 = new GregorianCalendar(2017, 04, 10);
+		GregorianCalendar day2 = new GregorianCalendar(2017, 04, 12);
+
+		LinkedList<CalDay> calDays = new LinkedList<CalDay>();
+		calDays = tb.getApptRange(appts, day1, day2);
+		assertNotEquals(calDays, null);
+		assertEquals(calDays.size(), 2);
 	}
 
 	@Test
