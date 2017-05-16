@@ -100,7 +100,7 @@ public class Appt {
     	 isValid();
     }
     
-    /** Sets startHour */
+    /** Sets startMinute */
     public void setStartMinute(int startMinute) {   	
         this.startMinute = startMinute;
         isValid();
