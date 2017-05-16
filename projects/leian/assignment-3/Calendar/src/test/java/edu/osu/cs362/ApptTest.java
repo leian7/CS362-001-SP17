@@ -193,7 +193,7 @@ public class ApptTest {
 	}
 	
 	@Test
-	public void test_toString() throws Throwable {
+	public void test_toString_valid_invalid_appts() throws Throwable {
 		// make an invalid appt
 		Appt invalid = new Appt(-1, startMinute, startDay, startMonth,
 								startYear, title, description);
@@ -204,5 +204,30 @@ public class ApptTest {
 								startYear, title, description);
 		// call toString on the good appt
 		assertNotEquals(valid.toString(), null);
+	}
+
+	@Test
+	public void test_toString_hour_check() throws Throwable {
+		// case: appt with hour < 11. expect AM
+		// case: appt with hour = 11. expect AM
+		Appt am = new Appt(10, startMinute, startDay, startMonth,
+								startYear, title, description);
+		assertTrue(am.toString().contains("am"));
+		assertTrue(am.toString().contains("10"));
+
+		Appt am2 = new Appt(11, startMinute, startDay, startMonth,
+								startYear, title, description);
+		assertTrue(am2.toString().contains("am"));
+		assertTrue(am2.toString().contains("11"));
+
+		Appt pm = new Appt(23, startMinute, startDay, startMonth,
+								startYear, title, description);
+		assertTrue(pm.toString().contains("pm"));
+		assertTrue(pm.toString().contains("11"));
+
+		Appt midnight = new Appt(0, startMinute, startDay, startMonth,
+								startYear, title, description);
+		assertTrue(midnight.toString().contains("am"));
+		assertTrue(midnight.toString().contains("12"));
 	}
 }
