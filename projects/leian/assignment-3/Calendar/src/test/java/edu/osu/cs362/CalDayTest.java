@@ -5,6 +5,7 @@ package edu.osu.cs362;
  */
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.LinkedList;
 
 
 import org.junit.Test;
@@ -12,6 +13,33 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class CalDayTest {
+
+	@Test
+	public void test_getSizeAppts() {
+		GregorianCalendar day = new GregorianCalendar(2017, 04, 10);
+		CalDay ok_cal = new CalDay(day);
+		assertEquals(ok_cal.getSizeAppts(), 0);
+
+		Appt new_appt = new Appt(13, 30, 10, 04, 2017, "New", "I want to add this appt to this CalDay");
+		ok_cal.addAppt(new_appt);
+		assertEquals(ok_cal.getSizeAppts(), 1);
+	}
+		
+	@Test
+	public void test_setAppts() throws Throwable {
+		// case: appts is not equal null.
+		// expect that appts get set correctly.
+		GregorianCalendar day = new GregorianCalendar(2017, 04, 10);
+		CalDay ok_cal = new CalDay(day);
+		assertEquals(ok_cal.getAppts().size(), 0);
+		assertNotEquals(ok_cal.getAppts(), null);
+
+		// case: appts is null.
+		// expect that appts are not set.
+		LinkedList<Appt> null_appts;
+		CalDay null_cal = new CalDay();
+		assertEquals(null_cal.getAppts(), null);
+	}
 
 	@Test
 	public void test_add_appt() throws Throwable {
@@ -112,6 +140,14 @@ public class CalDayTest {
 		Appt appt = new Appt(13, 30, 10, 04, 2017, "Dentist", "Regular cleaning");
 		good_cal.getAppts().add(appt);
 		assertTrue(good_cal.isValid());
+		assertNotEquals(good_cal.toString(), "");
+	}
+
+	@Test
+	public void test_to_string_no_appts() throws Throwable {
+		// case: good CalDay, but no appointments (iterator has no 'next')
+		GregorianCalendar day = new GregorianCalendar(2017, 04, 10);
+		CalDay good_cal = new CalDay(day);
 		assertNotEquals(good_cal.toString(), "");
 	}
 }
